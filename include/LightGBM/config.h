@@ -881,6 +881,14 @@ struct Config {
   // desc = this parameter is closely related to the desirable cutoff ``k`` in the metric **NDCG@k** that we aim at optimizing the ranker for. The optimal setting for this parameter is likely to be slightly higher than ``k`` (e.g., ``k + 3``) to include more pairs of documents to train on, but perhaps not too high to avoid deviating too much from the desired target metric **NDCG@k**
   int lambdarank_truncation_level = 30;
 
+  // check = >=0.0
+  // check = <=1.0
+  // desc = used only in the multi_rank_calibration objective
+  // desc = used to control the weight put on the ranking objective (relative to the calibration objective)
+  // desc = set this closer to ``1`` to put more priority on the ranking objective
+  // desc = set this closer to ``0`` to put more priority on the calibration objective
+  double rank_weight = 1.0;
+
   // desc = used only in ``lambdarank`` application
   // desc = set this to ``true`` to normalize the lambdas for different queries, and improve the performance for unbalanced data
   // desc = set this to ``false`` to enforce the original lambdarank algorithm
